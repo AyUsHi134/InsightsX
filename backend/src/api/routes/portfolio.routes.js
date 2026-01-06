@@ -9,9 +9,6 @@ import {
 
 const router = express.Router();
 
-/**
- * CREATE PORTFOLIO
- */
 router.post('/', async (req, res) => {
   try {
     const portfolio = await createPortfolio(req.body.name);
@@ -27,9 +24,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-/**
- * ADD TRANSACTION
- */
 router.post('/:id/transactions', async (req, res) => {
   try {
     const transaction = await addTransaction(req.params.id, req.body);
@@ -45,9 +39,6 @@ router.post('/:id/transactions', async (req, res) => {
   }
 });
 
-/**
- * HOLDINGS
- */
 router.get('/:id/holdings', async (req, res) => {
   try {
     const holdings = await getPortfolioHoldings(req.params.id);
@@ -57,9 +48,6 @@ router.get('/:id/holdings', async (req, res) => {
   }
 });
 
-/**
- * SUMMARY
- */
 router.get('/:id/summary', async (req, res) => {
   try {
     const summary = await getPortfolioSummary(req.params.id);
@@ -69,9 +57,6 @@ router.get('/:id/summary', async (req, res) => {
   }
 });
 
-/**
- * ALLOCATION
- */
 router.get('/:id/allocation', async (req, res) => {
   try {
     const allocation = await getPortfolioAllocation(req.params.id);

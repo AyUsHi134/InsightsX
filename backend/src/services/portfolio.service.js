@@ -1,10 +1,6 @@
 import pool from '../config/db.js';
 
-/**
- * Create a new portfolio
- * NOTE: user_id is required by schema.
- * For now we use a fixed user until auth is added.
- */
+/*Create portfolio*/
 export const createPortfolio = async (name) => {
   const USER_ID = '00000000-0000-0000-0000-000000000001';
 
@@ -20,9 +16,7 @@ export const createPortfolio = async (name) => {
   return result.rows[0];
 };
 
-/**
- * Add a transaction (BUY or SELL)
- */
+/*transaction (BUY or SELL)*/
 export const addTransaction = async (portfolioId, data) => {
   const {
     instrument_id,
@@ -53,14 +47,12 @@ export const addTransaction = async (portfolioId, data) => {
   return result.rows[0];
 };
 
-/**
- * Get computed holdings from transactions
- */
+/*holdings from transactions*/
 export const getPortfolioHoldings = async (portfolioId) => {
   const result = await pool.query(
     `
     SELECT
-      i.instrument_id,
+      i.instrument_id,allocation
       i.symbol,
       SUM(
         CASE
@@ -100,9 +92,7 @@ export const getPortfolioHoldings = async (portfolioId) => {
   });
 };
 
-/**
- * Portfolio summary
- */
+/*Portfolio summary*/
 export const getPortfolioSummary = async (portfolioId) => {
   const holdings = await getPortfolioHoldings(portfolioId);
 
@@ -117,9 +107,7 @@ export const getPortfolioSummary = async (portfolioId) => {
   };
 };
 
-/**
- * Allocation by instrument
- */
+/*Allocation by instrument*/
 export const getPortfolioAllocation = async (portfolioId) => {
   const holdings = await getPortfolioHoldings(portfolioId);
 
