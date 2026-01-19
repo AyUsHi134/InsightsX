@@ -1,69 +1,46 @@
 import { NavLink } from "react-router-dom";
 
-export default function Sidebar({ collapsed }) {
+export default function Sidebar({ collapsed, mobileOpen, onCloseMobile }) {
   return (
-    <aside
-      className={`
-        h-full
-        bg-slate-800
-        text-slate-200
-        transition-all duration-200
-        ${collapsed ? "w-16" : "w-60"}
-        pt-6
-      `}
-    >
-      <div className="px-4 mb-8">
-        {!collapsed && (
-          <p className="text-xs uppercase tracking-wide text-slate-400 mb-2">
-            Navigation
-          </p>
-        )}
+    <>
+      {/* Mobile overlay */}
+      {mobileOpen && (
+        <div
+          onClick={onCloseMobile}
+          className="fixed inset-0 bg-black/30 z-40 md:hidden"
+        />
+      )}
 
-        <NavItem to="/portfolio" label="Portfolio" collapsed={collapsed} />
-        <NavItem to="/insights" label="Insights" collapsed={collapsed} />
-      </div>
-
-      <div className="border-t border-slate-700 my-4" />
-
-      <div className="px-4">
-        {!collapsed && (
-          <p className="text-xs uppercase tracking-wide text-slate-400 mb-2">
-            System
-          </p>
-        )}
-
-        <div className="opacity-50">
-          <NavItem label="Market" collapsed={collapsed} disabled />
-          <NavItem label="Compare" collapsed={collapsed} disabled />
+      <aside
+        className={`
+          fixed md:static z-50 h-full
+          bg-[#0f1f2d]
+          transition-all duration-300
+          ${collapsed ? "w-20" : "w-64"}
+          ${mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
+        `}
+      >
+        {/* Logo */}
+        <div className="h-20 flex items-center px-6 text-white text-xl font-semibold">
+          {!collapsed && "InsightX"}
         </div>
-      </div>
-    </aside>
-  );
-}
 
-function NavItem({ to, label, collapsed, disabled }) {
-  const base = "block px-3 py-2 rounded-md text-sm transition";
-
-  if (disabled) {
-    return (
-      <div className={`${base} text-slate-400 cursor-not-allowed`}>
-        {collapsed ? label[0] : label}
-      </div>
-    );
-  }
-
-  return (
-    <NavLink
-      to={to}
-      className={({ isActive }) =>
-        `${base} ${
-          isActive
-            ? "bg-teal-600 text-white"
-            : "hover:bg-slate-700"
-        }`
-      }
-    >
-      {collapsed ? label[0] : label}
-    </NavLink>
+        {/* Nav */}
+        <nav className="px-4 space-y-2">
+          <NavLink
+            to="/portfolio"
+            className="block px-4 py-2 rounded-md text-slate-200 bg-teal-600"
+          >
+            Portfolio
+          </NavLink>
+          <NavLink
+            to="/insights"
+            className="block px-4 py-2 rounded-md text-slate-300 hover:bg-white/10"
+          >
+            Insights
+          </NavLink>
+        </nav>
+      </aside>
+    </>
   );
 }
