@@ -1,29 +1,12 @@
 import { Bell, Search, Menu } from "lucide-react";
 import { useLocation } from "react-router-dom";
 
-export default function Topbar({ onToggleSidebar, onOpenMobile }) {
+export default function Topbar() {
   const location = useLocation();
   const section = location.pathname.split("/")[1] || "portfolio";
 
   return (
     <header className="h-20 bg-white border-b border-slate-200 flex items-center px-6 gap-4">
-      
-      {/* Mobile menu */}
-      <button
-        onClick={onOpenMobile}
-        className="md:hidden p-2 rounded-md hover:bg-slate-100"
-      >
-        <Menu />
-      </button>
-
-      {/* Desktop collapse */}
-      <button
-        onClick={onToggleSidebar}
-        className="hidden md:flex p-2 rounded-md hover:bg-slate-100"
-      >
-        <Menu />
-      </button>
-
       <span className="text-lg font-semibold text-slate-800 capitalize">
         {section} / Dashboard
       </span>
