@@ -1,1 +1,82 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* =========================================================
+   GLOBAL THEME TOKENS
+   - Light tokens match your CURRENT UI (default)
+   - Dark tokens match your LOCKED dark theme palette
+   ========================================================= */
+
+/* LIGHT (DEFAULT) */
+:root {
+  /* App foundation */
+  --app-bg: #eef5fb;
+
+  /* Sidebar */
+  --sidebar-bg: #ecf7f4;
+
+  /* Surfaces / cards */
+  --surface: #ffffff;
+  --surface-elevated: #f2f6f9;
+
+  /* Borders */
+  --border: #c3d6d0;
+
+  /* Accent */
+  --accent: #14b8a6;
+  --accent-soft: rgba(20, 184, 166, 0.12);
+
+  /* Text */
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --text-disabled: #94a3b8;
+
+  /* Icons */
+  --icon-default: #64748b;
+  --icon-hover: #0f172a;
+  --icon-active: #14b8a6;
+
+  /* Optional (if you use later) */
+  --danger: #f43f5e;
+
+  --brand: #14b8a6;
+  --brand-contrast: #ffffff
+}
+
+/* DARK (ON .dark CLASS ON <html>) */
+.dark {
+  /* App foundation */
+  --app-bg: #0b1220;
+
+  /* Sidebar */
+  --sidebar-bg: #0f1a2b;
+
+  /* Surfaces / cards */
+  --surface: #121e32;
+  --surface-elevated: #16243b;
+
+  /* Borders */
+  --border: #1e2a40;
+
+  /* Accent */
+  --accent: #2dd4bf;
+  --accent-soft: rgba(45, 212, 191, 0.14);
+
+  /* Text */
+  --text-primary: #e6edf7;
+  --text-secondary: #b6c2d9;
+  --text-muted: #7c8db0;
+  --text-disabled: #5a6a8a;
+
+  /* Icons */
+  --icon-default: #7c8db0;
+  --icon-hover: #e6edf7;
+  --icon-active: #2dd4bf;
+
+  /* Optional */
+  --danger: #f43f5e;
+
+  --brand: #2dd4bf;
+  --brand-contrast: #0b1220;
+}

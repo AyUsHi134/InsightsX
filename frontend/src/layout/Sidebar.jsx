@@ -24,7 +24,7 @@ export default function Sidebar({
   onCloseMobile,
   onToggleCollapse,
 }) {
-  const sidebarRef = useRef(null);
+
   const firstFocusableRef = useRef(null);
 
   /**
@@ -72,7 +72,7 @@ export default function Sidebar({
       {mobileOpen && (
         <div
           onClick={onCloseMobile}
-          className="fixed inset-0 bg-black/30 z-40 md:hidden"
+          className="fixed inset-0 bg-[var(--overlay)] z-40 md:hidden"
           aria-hidden="true"
         />
       )}
@@ -80,24 +80,23 @@ export default function Sidebar({
       {/* Sidebar */}
       <aside
         id="main-sidebar"
-        ref={sidebarRef}
         className={`
           fixed md:static z-50 h-full
-          bg-[#ecf7f4]
-          border border-[#c3d6d0]
+          bg-[var(--sidebar-bg)] 
+          border border-[var(--border)]
           rounded-xl
           transition-transform duration-300
 
-          ${collapsed ? "md:w-20" : "md:w-64"}
+          ${collapsed ? "md:w-[92px]" : "md:w-[280px]"}
           md:translate-x-0
-          w-64
+          w-[280px] 
           ${mobileOpen ? "translate-x-0" : "-translate-x-[110%]"}
         `}
         aria-label="Main navigation"
       >
 
         {/* ===== HEADER ===== */}
-        <div className="h-20 flex items-center px-4 text-slate-800 relative">
+        <div className="h-20 flex items-center pl-4 pr-12 text-[var(--text-primary)] relative">
 
           {/* Mobile Close Button */}
           {mobileOpen && (
@@ -105,18 +104,20 @@ export default function Sidebar({
               ref={firstFocusableRef}
               onClick={onCloseMobile}
               className="
-                md:hidden
-                absolute top-6 right-4
-                w-8 h-8
-                rounded-full
-                bg-[#ecf7f4]
-                border border-[#c3d6d0]
-                flex items-center justify-center
-                text-slate-700
-                hover:bg-[#e2f1ec]
-                focus:outline-none focus:ring-2 focus:ring-teal-500
-                transition-colors
-              "
+              md:hidden
+              absolute top-6 right-4
+              w-8 h-8
+              rounded-full
+              bg-[var(--sidebar-bg)]
+              shadow-[0_0_0_1px_var(--border)]
+              flex items-center justify-center
+              text-[var(--text-secondary)]
+              hover:bg-[var(--surface-elevated)]
+              hover:text-[var(--text-primary)]
+              focus:outline-none
+              focus-visible:outline-none
+              focus-visible:ring-2 focus-visible:ring-[var(--border)]
+              transition-colors"
               aria-label="Close navigation menu"
               aria-expanded="true"
               aria-controls="main-sidebar"
@@ -129,18 +130,20 @@ export default function Sidebar({
           <button
             onClick={onToggleCollapse}
             className="
-              hidden md:flex
-              absolute top-6 -right-4
-              w-8 h-8
-              rounded-full
-              bg-[#ecf7f4]
-              border border-[#c3d6d0]
-              items-center justify-center
-              text-slate-700
-              hover:bg-[#e2f1ec]
-              focus:outline-none focus:ring-2 focus:ring-teal-500
-              transition-colors
-            "
+            hidden md:flex
+            absolute top-6 -right-2
+            w-8 h-8
+            rounded-full
+            bg-[var(--sidebar-bg)]
+            shadow-[0_0_0_1px_var(--border)]
+            items-center justify-center
+            text-[var(--text-secondary)]
+            hover:bg-[var(--surface-elevated)]
+            hover:text-[var(--text-primary)]
+            focus:outline-none
+            focus-visible:outline-none
+            focus-visible:ring-2 focus-visible:ring-[var(--border)]
+            transition-colors"
             aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
             aria-expanded={!collapsed}
             aria-controls="main-sidebar"
@@ -155,7 +158,7 @@ export default function Sidebar({
           {/* App Icon + Name */}
           <div className="flex items-center gap-3">
             <div 
-              className="w-9 h-9 rounded-lg bg-teal-500 flex items-center justify-center text-white font-bold"
+              className="w-9 h-9 rounded-lg bg-[var(--brand)] flex items-center justify-center text-white font-bold"
               aria-hidden="true"
             >
               I
@@ -168,10 +171,10 @@ export default function Sidebar({
         </div>
 
         {/* Divider */}
-        <div className="mx-4 my-3 h-px bg-[#9fb7b0]" aria-hidden="true" />
+        <div className="mx-4 my-3 h-px bg-[var(--border)]" aria-hidden="true" />
         
         {/* ===== NAVIGATION ===== */}
-        <nav 
+        <nav  
           className="mt-4 space-y-1 px-2" 
           role="navigation"
           aria-label="Dashboard navigation"
@@ -183,10 +186,10 @@ export default function Sidebar({
               <div
                 className={`
                   relative flex items-center gap-3 px-3 py-2 rounded-md
-                  text-slate-600 hover:bg-teal-50
-                  focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-inset
+                  text-[var(--text-secondary)] hover:bg-[var(--surface-elevated)] hover:text-[var(--text-primary)]
+                  focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--border)] focus-visible:ring-inset
                   transition-colors
-                  ${isActive ? "text-teal-700 font-medium bg-teal-50/50" : ""}
+                  ${isActive ? "text-[var(--accent)] font-medium bg-[var(--accent-soft)]" : ""}
                 `}
                 role="menuitem"
                 tabIndex="0"
@@ -195,7 +198,7 @@ export default function Sidebar({
                 {/* Active Indicator */}
                 {isActive && (
                   <span 
-                    className="absolute -left-2 top-1/2 -translate-y-1/2 w-1 h-6 bg-teal-500 rounded-full"
+                    className="absolute -left-2 top-1/2 -translate-y-1/2 w-1 h-6 bg-[var(--accent)] rounded-full"
                     aria-hidden="true"
                   />
                 )}
@@ -217,10 +220,10 @@ export default function Sidebar({
               <div
                 className={`
                   relative flex items-center gap-3 px-3 py-2 rounded-md
-                  text-slate-600 hover:bg-teal-50
-                  focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-inset
+                  text-[var(--text-secondary)] hover:bg-[var(--surface-elevated)] hover:text-[var(--text-primary)]
+                  focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--border)] focus-visible:ring-inset
                   transition-colors
-                  ${isActive ? "text-teal-700 font-medium bg-teal-50/50" : ""}
+                  ${isActive ? "text-[var(--accent)] font-medium bg-[var(--accent-soft)]" : ""}
                 `}
                 role="menuitem"
                 tabIndex="0"
@@ -228,7 +231,7 @@ export default function Sidebar({
               >
                 {isActive && (
                   <span 
-                    className="absolute -left-2 top-1/2 -translate-y-1/2 w-1 h-6 bg-teal-500 rounded-full"
+                    className="absolute -left-2 top-1/2 -translate-y-1/2 w-1 h-6 bg-[var(--accent)] rounded-full"
                     aria-hidden="true"
                   />
                 )}
